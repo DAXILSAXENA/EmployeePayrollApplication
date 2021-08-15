@@ -1,10 +1,14 @@
 /** EmployeePayrollDTO.java */
 package com.bridgelabz.employeepayrollserviceapp.dto;
 
+import lombok.ToString;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
+@ToString
 public class EmployeePayrollDTO {
 
 	// @NotEmpty annotation to validate that user don't pass an empty value
@@ -17,30 +21,11 @@ public class EmployeePayrollDTO {
 	@Min(value = 500, message = "Min Wage should be more than 500")
 	public long salary;
 
-	public EmployeePayrollDTO(String name, long salary) {
-		this.name = name;
-		this.salary = salary;
-	}
+	public String gender;
 
-	public String getName() {
-		return name;
-	}
+	public String note;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+	public String profilePic;
 
-	public long getSalary() {
-		return salary;
-	}
-
-	public void setSalary(long salary) {
-		this.salary = salary;
-	}
-
-	@Override
-	public String toString() {
-		return "EmployeePayrollDTO [name=" + name + ", salary=" + salary + "]";
-	}
-
+	public List<String> departments;
 }

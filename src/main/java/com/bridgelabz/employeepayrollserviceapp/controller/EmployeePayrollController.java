@@ -1,5 +1,5 @@
 /**
- * Ability to throw User Friendly Errors in case Employee Id is not found in Employee Payroll App.
+ * Adding remaining properties to the Payroll DTO and Model.
  *
  * @author DAXIL SAXENA
  * @since 10.08.2021
@@ -9,6 +9,7 @@ package com.bridgelabz.employeepayrollserviceapp.controller;
 
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,12 +31,13 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/employeepayrollservice")
+@Slf4j
 public class EmployeePayrollController {
 
     @Autowired
     private IEmployeePayrollService employeePayrollService;
 
-    //	Annotations for mapping web requests on methods in request-handling classes with flexible method signatures.
+    // Annotations for mapping web requests on methods in request-handling classes with flexible method signatures.
 
     @RequestMapping(value = {"", "/", "/get"})
     // ResponseEntity used for returning JSON Object
@@ -45,7 +47,7 @@ public class EmployeePayrollController {
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
 
-    //	Annotation for mapping HTTP GET requests onto specific handler methods.
+    // Annotation for mapping HTTP GET requests onto specific handler methods.
 
     @GetMapping("/get/{empId}")
     public ResponseEntity<ResponseDTO> getEmployeePayrollData(@PathVariable("empId") int empId) {
@@ -54,17 +56,18 @@ public class EmployeePayrollController {
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
 
-    //	Annotation for mapping HTTP POST requests onto specific handler methods.
+    // Annotation for mapping HTTP POST requests onto specific handler methods.
     // @Valid annotation used to validate user input
 
     @PostMapping("/create")
     public ResponseEntity<ResponseDTO> addEmployeePayrollData(@Valid @RequestBody EmployeePayrollDTO employeePayrollDTO) {
+        log.info("Employee DTO:" +employeePayrollDTO.toString());
         EmployeePayrollData employeePayrollData = employeePayrollService.createEmployeePayrollData(employeePayrollDTO);
         ResponseDTO responseDTO = new ResponseDTO("Create Call For Employee Successful", employeePayrollData);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
 
-    //	Annotation for mapping HTTP PUT requests onto specific handler methods.
+    // Annotation for mapping HTTP PUT requests onto specific handler methods.
     // @Valid annotation used to validate user input
 
     @PutMapping("/update/{empId}")
@@ -76,7 +79,7 @@ public class EmployeePayrollController {
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
 
-    //	Annotation for mapping HTTP DELETE requests onto specific handler methods.
+    // Annotation for mapping HTTP DELETE requests onto specific handler methods.
 
     @DeleteMapping("/delete/{empId}")
     public ResponseEntity<ResponseDTO> deleteEmployeePayrollData(@PathVariable("empId") int empId) {
