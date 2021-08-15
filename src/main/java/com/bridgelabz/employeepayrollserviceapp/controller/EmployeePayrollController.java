@@ -1,5 +1,5 @@
 /**
- * Added validation to name and salary field
+ * Provide User Friendly Error Response in case validation fails
  *
  * @author DAXIL SAXENA
  * @since 10.08.2021
