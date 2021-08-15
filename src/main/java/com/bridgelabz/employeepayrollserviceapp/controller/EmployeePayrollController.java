@@ -1,5 +1,5 @@
 /**
- * Ability to develop rest of the CRUD Service Methods with MySQL Database
+ * Ability to retrieve all the records of employee payroll pertaining to sales department
  *
  * @author DAXIL SAXENA
  * @since 10.08.2021
@@ -61,7 +61,7 @@ public class EmployeePayrollController {
 
     @PostMapping("/create")
     public ResponseEntity<ResponseDTO> addEmployeePayrollData(@Valid @RequestBody EmployeePayrollDTO employeePayrollDTO) {
-        log.info("Employee DTO:" +employeePayrollDTO.toString());
+        log.info("Employee DTO:" + employeePayrollDTO.toString());
         EmployeePayrollData employeePayrollData = employeePayrollService.createEmployeePayrollData(employeePayrollDTO);
         ResponseDTO responseDTO = new ResponseDTO("Create Call For Employee Successful", employeePayrollData);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
@@ -85,6 +85,16 @@ public class EmployeePayrollController {
     public ResponseEntity<ResponseDTO> deleteEmployeePayrollData(@PathVariable("empId") int empId) {
         employeePayrollService.deleteEmployeePayrollData(empId);
         ResponseDTO responseDTO = new ResponseDTO("Deleted Successfully", "Deleted id: " + empId);
+        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+    }
+
+    // Annotation for mapping HTTP GET requests onto specific handler methods.
+
+    @GetMapping("/department/{department}")
+    public ResponseEntity<ResponseDTO> getEmployeePayrollData(@PathVariable("department") String department) {
+        List<EmployeePayrollData> empDataList;
+        empDataList = employeePayrollService.getEmployeesByDepartment(department);
+        ResponseDTO responseDTO = new ResponseDTO("Get Call For ID Successful", empDataList);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
 

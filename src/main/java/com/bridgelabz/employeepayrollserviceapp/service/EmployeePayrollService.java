@@ -28,6 +28,11 @@ public class EmployeePayrollService implements IEmployeePayrollService {
         return employeePayrollRepository.save(employeePayrollData);
     }
 
+    @Override
+    public List<EmployeePayrollData> getEmployeesByDepartment(String department) {
+        return employeePayrollRepository.findEmployeePayrollDataByDepartments(department);
+    }
+
     public EmployeePayrollData getEmployeePayrollDataById(int empId) {
         // Throwing custom exception when employee Id does match any employee Id stored in list
         return employeePayrollRepository.findById(empId).orElseThrow(() -> new EmployeePayrollException("Employee not Found"));
