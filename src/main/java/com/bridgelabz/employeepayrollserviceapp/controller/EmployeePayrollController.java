@@ -1,5 +1,5 @@
 /**
- * Adding remaining properties to the Payroll DTO and Model.
+ * Ensure validations is done on the Payroll DTO
  *
  * @author DAXIL SAXENA
  * @since 10.08.2021
