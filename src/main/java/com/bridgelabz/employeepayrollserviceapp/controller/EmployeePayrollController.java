@@ -1,5 +1,5 @@
 /**
- * Provide User Friendly Error Response in case validation fails
+ * Ability to throw User Friendly Errors in case Employee Id is not found in Employee Payroll App.
  *
  * @author DAXIL SAXENA
  * @since 10.08.2021
