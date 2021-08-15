@@ -26,6 +26,8 @@ import com.bridgelabz.employeepayrollserviceapp.dto.ResponseDTO;
 import com.bridgelabz.employeepayrollserviceapp.model.EmployeePayrollData;
 import com.bridgelabz.employeepayrollserviceapp.service.IEmployeePayrollService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/employeepayrollservice")
 public class EmployeePayrollController {
@@ -53,19 +55,21 @@ public class EmployeePayrollController {
 	}
 
 //	Annotation for mapping HTTP POST requests onto specific handler methods.
+// @Valid annotation used to validate user input
 
 	@PostMapping("/create")
-	public ResponseEntity<ResponseDTO> addEmployeePayrollData(@RequestBody EmployeePayrollDTO employeePayrollDTO) {
+	public ResponseEntity<ResponseDTO> addEmployeePayrollData( @Valid @RequestBody EmployeePayrollDTO employeePayrollDTO) {
 		EmployeePayrollData employeePayrollData = employeePayrollService.createEmployeePayrollData(employeePayrollDTO);
 		ResponseDTO responseDTO = new ResponseDTO("Create Call For Employee Successful", employeePayrollData);
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	}
 
 //	Annotation for mapping HTTP PUT requests onto specific handler methods.
-
+// @Valid annotation used to validate user input
+	
 	@PutMapping("/update/{empId}")
 	public ResponseEntity<ResponseDTO> updateEmployeePayrollData(@PathVariable("empId") int empId,
-			@RequestBody EmployeePayrollDTO employeePayrollDTO) {
+			@Valid @RequestBody EmployeePayrollDTO employeePayrollDTO) {
 		EmployeePayrollData employeePayrollData = employeePayrollService.updateEmployeePayrollData(empId,
 				employeePayrollDTO);
 		ResponseDTO responseDTO = new ResponseDTO("Update Call For Employee Successful", employeePayrollData);

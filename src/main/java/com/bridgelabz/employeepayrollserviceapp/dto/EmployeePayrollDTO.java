@@ -1,7 +1,15 @@
 /** EmployeePayrollDTO.java */
 package com.bridgelabz.employeepayrollserviceapp.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+
 public class EmployeePayrollDTO {
+
+	// @NotEmpty annotation to validate that user don't pass an empty value
+	// @Pattern annotation used to validate user input using regexp
+	@NotEmpty
+	@Pattern(regexp = "^[A-Z]{1}[a-zA-Z\\s]{2,}$", message = "Employee Name INVALID")
 	public String name;
 	public long salary;
 
