@@ -1,6 +1,7 @@
 /** EmployeePayrollDTO.java */
 package com.bridgelabz.employeepayrollserviceapp.dto;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
@@ -11,6 +12,9 @@ public class EmployeePayrollDTO {
 	@NotEmpty
 	@Pattern(regexp = "^[A-Z]{1}[a-zA-Z\\s]{2,}$", message = "Employee Name INVALID")
 	public String name;
+
+	// @Min annotation to specify minimum Salary
+	@Min(value = 500, message = "Min Wage should be more than 500")
 	public long salary;
 
 	public EmployeePayrollDTO(String name, long salary) {

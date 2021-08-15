@@ -1,6 +1,6 @@
 /**
- * Added ArrayList in Service Layer to store EmployeePayrollData
- * 
+ * Added validation to name and salary field
+ *
  * @author DAXIL SAXENA
  * @since 10.08.2021
  */
@@ -32,57 +32,57 @@ import javax.validation.Valid;
 @RequestMapping("/employeepayrollservice")
 public class EmployeePayrollController {
 
-	@Autowired
-	private IEmployeePayrollService employeePayrollService;
+    @Autowired
+    private IEmployeePayrollService employeePayrollService;
 
-//	Annotations for mapping web requests on methods in request-handling classes with flexible method signatures.
+    //	Annotations for mapping web requests on methods in request-handling classes with flexible method signatures.
 
-	@RequestMapping(value = { "", "/", "/get" })
-	// ResponseEntity used for returning JSON Object
-	public ResponseEntity<ResponseDTO> getEmployeePayrollData() {
-		List<EmployeePayrollData> employeePayrollData = employeePayrollService.getEmployeePayrollData();
-		ResponseDTO responseDTO = new ResponseDTO("Get Call Successful", employeePayrollData);
-		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
-	}
+    @RequestMapping(value = {"", "/", "/get"})
+    // ResponseEntity used for returning JSON Object
+    public ResponseEntity<ResponseDTO> getEmployeePayrollData() {
+        List<EmployeePayrollData> employeePayrollData = employeePayrollService.getEmployeePayrollData();
+        ResponseDTO responseDTO = new ResponseDTO("Get Call Successful", employeePayrollData);
+        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+    }
 
-//	Annotation for mapping HTTP GET requests onto specific handler methods.
+    //	Annotation for mapping HTTP GET requests onto specific handler methods.
 
-	@GetMapping("/get/{empId}")
-	public ResponseEntity<ResponseDTO> getEmployeePayrollData(@PathVariable("empId") int empId) {
-		EmployeePayrollData employeePayrollData = employeePayrollService.getEmployeePayrollDataById(empId);
-		ResponseDTO responseDTO = new ResponseDTO("Get Call For ID Successful", employeePayrollData);
-		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
-	}
+    @GetMapping("/get/{empId}")
+    public ResponseEntity<ResponseDTO> getEmployeePayrollData(@PathVariable("empId") int empId) {
+        EmployeePayrollData employeePayrollData = employeePayrollService.getEmployeePayrollDataById(empId);
+        ResponseDTO responseDTO = new ResponseDTO("Get Call For ID Successful", employeePayrollData);
+        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+    }
 
-//	Annotation for mapping HTTP POST requests onto specific handler methods.
-// @Valid annotation used to validate user input
+    //	Annotation for mapping HTTP POST requests onto specific handler methods.
+    // @Valid annotation used to validate user input
 
-	@PostMapping("/create")
-	public ResponseEntity<ResponseDTO> addEmployeePayrollData( @Valid @RequestBody EmployeePayrollDTO employeePayrollDTO) {
-		EmployeePayrollData employeePayrollData = employeePayrollService.createEmployeePayrollData(employeePayrollDTO);
-		ResponseDTO responseDTO = new ResponseDTO("Create Call For Employee Successful", employeePayrollData);
-		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
-	}
+    @PostMapping("/create")
+    public ResponseEntity<ResponseDTO> addEmployeePayrollData(@Valid @RequestBody EmployeePayrollDTO employeePayrollDTO) {
+        EmployeePayrollData employeePayrollData = employeePayrollService.createEmployeePayrollData(employeePayrollDTO);
+        ResponseDTO responseDTO = new ResponseDTO("Create Call For Employee Successful", employeePayrollData);
+        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+    }
 
-//	Annotation for mapping HTTP PUT requests onto specific handler methods.
-// @Valid annotation used to validate user input
-	
-	@PutMapping("/update/{empId}")
-	public ResponseEntity<ResponseDTO> updateEmployeePayrollData(@PathVariable("empId") int empId,
-			@Valid @RequestBody EmployeePayrollDTO employeePayrollDTO) {
-		EmployeePayrollData employeePayrollData = employeePayrollService.updateEmployeePayrollData(empId,
-				employeePayrollDTO);
-		ResponseDTO responseDTO = new ResponseDTO("Update Call For Employee Successful", employeePayrollData);
-		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
-	}
+    //	Annotation for mapping HTTP PUT requests onto specific handler methods.
+    // @Valid annotation used to validate user input
 
-//	Annotation for mapping HTTP DELETE requests onto specific handler methods.
+    @PutMapping("/update/{empId}")
+    public ResponseEntity<ResponseDTO> updateEmployeePayrollData(@PathVariable("empId") int empId,
+                                                                 @Valid @RequestBody EmployeePayrollDTO employeePayrollDTO) {
+        EmployeePayrollData employeePayrollData = employeePayrollService.updateEmployeePayrollData(empId,
+                employeePayrollDTO);
+        ResponseDTO responseDTO = new ResponseDTO("Update Call For Employee Successful", employeePayrollData);
+        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+    }
 
-	@DeleteMapping("/delete/{empId}")
-	public ResponseEntity<ResponseDTO> deleteEmployeePayrollData(@PathVariable("empId") int empId) {
-		employeePayrollService.deleteEmployeePayrollData(empId);
-		ResponseDTO responseDTO = new ResponseDTO("Deleted Successfully", "Deleted id: " + empId);
-		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
-	}
+    //	Annotation for mapping HTTP DELETE requests onto specific handler methods.
+
+    @DeleteMapping("/delete/{empId}")
+    public ResponseEntity<ResponseDTO> deleteEmployeePayrollData(@PathVariable("empId") int empId) {
+        employeePayrollService.deleteEmployeePayrollData(empId);
+        ResponseDTO responseDTO = new ResponseDTO("Deleted Successfully", "Deleted id: " + empId);
+        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+    }
 
 }
